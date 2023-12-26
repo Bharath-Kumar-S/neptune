@@ -3,15 +3,15 @@ import { useSessionContext } from "supertokens-auth-react/recipe/session";
 import "./Home.css";
 
 export default function Home() {
-    const sessionContext = useSessionContext();
+  const sessionContext = useSessionContext();
 
-    if (sessionContext.loading === true) {
-        return null;
-    }
+  if (sessionContext.loading === true) {
+    return null;
+  }
 
-    return (
-        <div className="fill" id="home-container">
-            <SuccessView userId={sessionContext.userId} />
-        </div>
-    );
+  return (
+    <div className="fill" id="home-container">
+      <SuccessView userId={sessionContext.userId} />
+    </div>
+  );
 }

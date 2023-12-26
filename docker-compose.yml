@@ -1,6 +1,23 @@
 version: '3'
 
 services:
+  mongodb:
+    image: mongo:latest
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=admin
+    #   - MONGO_INITDB_ROOT_PASSWORD=admin_password
+    #   - MONGO_INITDB_DATABASE=mydatabase
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.stats()" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-core-data:/data/db
+      - mongo-core-data:/data/configdb
+
   db:
     image: mysql:latest
     environment:
@@ -45,4 +62,6 @@ networks:
 
 volumes:
   supertokens-data:
+    external: true
+  mongo-core-data:
     external: true
